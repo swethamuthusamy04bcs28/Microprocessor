@@ -1,0 +1,19 @@
+
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM DB 0005H
+FACT DB 0001H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV CX,NUM
+        MOV AL,01H
+L1:     MUL CL
+        DEC CL
+        JNZ L1
+        MOV FACT,AX
+CODE ENDS
+END
