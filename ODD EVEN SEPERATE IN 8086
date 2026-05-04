@@ -1,0 +1,33 @@
+               OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+SOURCE DB 05H,08H,03H,04H,07H
+EVENARR DB 00H,00H,00H,00H,00H
+ODDARR DB 00H,00H,00H,00H,00H
+COUNT DB, 05H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA,ES:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV ES,AX
+        LEA SI,SOURCE
+        LEA DI,EVENARR
+        LEA BX,ODDARR
+        MOV CL,COUNT
+L1:     MOV AL,[SI]
+        AND AL,01H
+        JZ L2
+        MOV AL,[SI]
+        MOV [BX],AL
+        INC BX
+        JMP L3
+L2:     MOV AL,[SI]
+        MOV [DI],AL
+        INC DI
+L3:     INC SI
+        DEC CL
+        JNZ L1
+        HLT
+CODE ENDS
+END
