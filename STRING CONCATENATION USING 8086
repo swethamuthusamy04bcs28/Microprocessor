@@ -1,0 +1,30 @@
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+STR1 DB 'HELLO '
+LEN1 DW 06H
+STR2 DB 'WORLD'
+LEN2 DW 05H
+DEST DB 20H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE, DS:DATA
+START:
+        MOV AX, DATA
+        MOV DS, AX
+        LEA DI, DEST
+        LEA SI, STR1
+        MOV CX, LEN1
+        MOV AL, [SI]
+        MOV [DI], AL
+        INC SI
+        INC DI
+        LEA SI, STR2
+        MOV CX, LEN2
+        MOV AL, [SI]
+        MOV [DI], AL
+        INC SI
+        INC DI
+        HLT
+CODE ENDS
+END
